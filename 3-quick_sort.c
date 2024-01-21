@@ -1,5 +1,4 @@
 #include "sort.h"
-#include <stdio.h>
 
 /**
  * lomuto_partition - Lomuto partition scheme for Quick Sort
@@ -11,9 +10,9 @@
  *
  * Return: Index of the pivot after partitioning
  */
-size_t lomuto_partition(int *array, int low, int high, size_t size)
+size_t lomuto_partition(int *array, ssize_t low, ssize_t high, size_t size)
 {
-	int pivot, temp;
+	int pivot;
 	int i, j;
 
 	pivot = array[high];
@@ -23,22 +22,12 @@ size_t lomuto_partition(int *array, int low, int high, size_t size)
 	{
 		if (array[j] < pivot)
 		{
-			i++;
-			/* Swap elements and print the array */
-			temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-			print_array(array, size);
+			swap(array, size, &array[j], &array[i++]);
 		}
 	}
+	swap(array, size, &array[i], &array[high]);
 
-	/* Swap the pivot to its correct position and print the array */
-	temp = array[i + 1];
-	array[i + 1] = array[high];
-	array[high] = temp;
-	print_array(array, size);
-
-	return (i + 1);
+	return (i);
 }
 
 /**
@@ -49,7 +38,7 @@ size_t lomuto_partition(int *array, int low, int high, size_t size)
  * @high: Ending index of the partition
  * @size: Number of elements in @array
  */
-void lomuto_quick_sort(int *array, int low, int high, size_t size)
+void lomuto_quick_sort(int *array, ssize_t low, ssize_t high, size_t size)
 {
 	size_t pivot;
 
@@ -71,8 +60,25 @@ void lomuto_quick_sort(int *array, int low, int high, size_t size)
  */
 void quick_sort(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (!array || !size)
 		return;
-
 	lomuto_quick_sort(array, 0, size - 1, size);
+}
+/**
+ * swap - swap tow integers
+ * @array: integer array to be sotred
+ * @Size: array size
+ * @a: first value address
+ * @b: second value address
+ *
+*/
+void swap(int *array, size_t size, int *a, int *b)
+{
+	if (*a != *b)
+	{
+		*a = *a + *b;
+		*b = *a - *b;
+		*a = *a - *b;
+		print_array((const  int *)array, size);
+	}
 }
