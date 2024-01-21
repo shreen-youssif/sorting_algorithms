@@ -27,10 +27,8 @@ void print_list(const listint_t *list);
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
-size_t lomuto_partition(int *array, ssize_t low, ssize_t high, size_t size);
-void lomuto_quick_sort(int *array, ssize_t low, ssize_t high, size_t size);
-void quick_sort(int *array, size_t size);
-void swap(int *array, size_t size, int *a, int *b);
+/* quick sort **/
+
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
 void swap_nodes(listint_t **list, listint_t *a, listint_t *b);
