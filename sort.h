@@ -2,6 +2,9 @@
 #define SORT_H
 
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 /**
  * struct listint_s - Doubly linked list node
@@ -12,9 +15,9 @@
  */
 typedef struct listint_s
 {
-    const int n;
-    struct listint_s *prev;
-    struct listint_s *next;
+	const int n;
+	struct listint_s *prev;
+	struct listint_s *next;
 } listint_t;
 
 void print_array(const int *array, size_t size);
@@ -23,23 +26,18 @@ void print_list(const listint_t *list);
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
+size_t lomuto_partition(int *array, int low, int high, size_t size);
+void lomuto_quick_sort(int *array, int low, int high, size_t size);
 void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
+void swap_nodes(listint_t **list, listint_t *a, listint_t *b);
 void counting_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
+void merge_sort_recursive(int *array, size_t left, size_t right);
+void merge(int *array, size_t left, size_t middle, size_t right);
 void heap_sort(int *array, size_t size);
-void radix_sort(int *array, size_t size);
-void bitonic_sort(int *array, size_t size);
-void quick_sort_hoare(int *array, size_t size);
-void radix_sort(int *array, size_t size);
-void heap_sort(int *array, size_t size);
-void merge_sort(int *array, size_t size);
-void merge_sort_recursive(int *array, size_t size, int *temp);
-void merge_arrays(int *array, size_t size, int *temp);
-void max_heapify(int *array, size_t size, size_t i, size_t total);
-void heapify(int *array, size_t size);
-int partition(int *array, int low, int high);
-void quick_sort_recursive(int *array, int low, int high);
-
+void build_max_heap(int *array, size_t size);
+void heapify(int *array, size_t size, int root);
+void swap(int *a, int *b);
 #endif /* SORT_H */
