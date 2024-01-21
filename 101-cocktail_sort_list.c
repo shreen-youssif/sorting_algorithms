@@ -10,24 +10,24 @@
  */
 void swap_nodes(listint_t **list, listint_t *a, listint_t *b)
 {
-    if (!a || !b)
-        return;
+	if (!a || !b)
+		return;
 
-    if (a->prev)
-        a->prev->next = b;
-    if (b->next)
-        b->next->prev = a;
+	if (a->prev)
+		a->prev->next = b;
+	if (b->next)
+		b->next->prev = a;
 
-    a->next = b->next;
-    b->prev = a->prev;
+	a->next = b->next;
+	b->prev = a->prev;
 
-    a->prev = b;
-    b->next = a;
+	a->prev = b;
+	b->next = a;
 
-    if (*list == a)
-        *list = b;
+	if (*list == a)
+		*list = b;
 
-    print_list(*list);
+	print_list(*list);
 }
 
 /**
@@ -38,46 +38,44 @@ void swap_nodes(listint_t **list, listint_t *a, listint_t *b)
  */
 void cocktail_sort_list(listint_t **list)
 {
-    listint_t *start, *end;
-    int swapped = 1;
+	listint_t *start, *end;
+	int swapped = 1;
 
-    if (!list || !(*list) || !((*list)->next))
-        return;
+	if (!list || !(*list) || !((*list)->next))
+		return;
+	start = *list;
+	end = NULL;
+	while (swapped)
+	{
+		swapped = 0;
 
-    start = *list;
-    end = NULL;
+		/* Forward pass (left to right) */
+		while (start->next != end)
+		{
+			if (start->n > start->next->n)
+			{
+				swap_nodes(list, start, start->next);
+				swapped = 1;
+			}
+			else
+				start = start->next;
+		}
 
-    while (swapped)
-    {
-        swapped = 0;
+		if (!swapped)
+			break;
 
-        /* Forward pass (left to right) */
-        while (start->next != end)
-        {
-            if (start->n > start->next->n)
-            {
-                swap_nodes(list, start, start->next);
-                swapped = 1;
-            }
-            else
-                start = start->next;
-        }
+		end = start;
 
-        if (!swapped)
-            break;
-
-        end = start;
-
-        /* Backward pass (right to left) */
-        while (start->prev != NULL)
-        {
-            if (start->n < start->prev->n)
-            {
-                swap_nodes(list, start->prev, start);
-                swapped = 1;
-            }
-            else
-                start = start->prev;
-        }
-    }
+		/* Backward pass (right to left) */
+		while (start->prev != NULL)
+		{
+			if (start->n < start->prev->n)
+			{
+				swap_nodes(list, start->prev, start);
+				swapped = 1;
+			}
+			else
+				start = start->prev;
+		}
+	}
 }
