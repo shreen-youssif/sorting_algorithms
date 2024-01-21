@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 
 /**
@@ -34,12 +35,16 @@ void quicksort(int *array, size_t size, ssize_t low, ssize_t high);
 void quick_sort(int *array, size_t size);
 /* shell sort */
 void shell_sort(int *array, size_t size);
+/* cocktail list sort */
 void cocktail_sort_list(listint_t **list);
 void swap_nodes(listint_t **list, listint_t *a, listint_t *b);
+/* counting sort */
 void counting_sort(int *array, size_t size);
+/* merge sort */
 void merge_sort(int *array, size_t size);
 void merge_sort_recursive(int *array, size_t left, size_t right);
 void merge(int *array, size_t left, size_t middle, size_t right);
+/* heap sort */
 void heap_sort(int *array, size_t size);
 void build_max_heap(int *array, size_t size);
 void heapify(int *array, size_t size, int root);
