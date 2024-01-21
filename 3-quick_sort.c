@@ -4,12 +4,18 @@
  * swap - Swaps two integers in an array
  * @a: Pointer to the first integer
  * @b: Pointer to the second integer
+ * @array: integer array
+ * @size: array size
  */
-void swap(int *a, int *b)
+void swap(int *array, size_t size, int *a, int *b)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+	if (*a != *b)
+	{
+		*a = *a + *b;
+		*b = *a - *b;
+		*a = *a - *b;
+		print_array((const int *)array, size);
+	}
 }
 
 /**
@@ -20,24 +26,17 @@ void swap(int *a, int *b)
  * @size: Size of the array
  * Return: Index of the pivot element after partitioning
  */
-int lomuto_partition(int *array, int low, int high, size_t size)
+size_t lomuto_partition(int *array, size_t size, ssize_t low, ssize_t high)
 {
-    int pivot = array[high];
-    int i = low - 1;
-    int j;
 
-    for (j = low; j <= high - 1; j++)
-    {
-        if (array[j] < pivot)
-        {
-            i++;
-            swap(&array[i], &array[j]);
-            print_array(array, size);
-        }
-    }
-    swap(&array[i + 1], &array[high]);
-    print_array(array, size);
-    return (i + 1);
+	int i, j, pivot = array[high];
+
+	for (i = j = low; j < high; j++;)
+		if (array[j] < pivot)
+			swap(array, size, &array[j], &array[i++]);
+	swap(array, size, &array[i], &array[high]);
+
+	return (i);
 }
 
 /**
@@ -47,15 +46,15 @@ int lomuto_partition(int *array, int low, int high, size_t size)
  * @high: Ending index of the partition
  * @size: Size of the array
  */
-void quicksort(int *array, int low, int high, size_t size)
+void quicksort(int *array, size_t size, ssize_t low, ssize_t high)
 {
-    if (low < high)
-    {
-        int pi = lomuto_partition(array, low, high, size);
+	if (low < high)
+	{
+		size_t pi = lomuto_partition(array, size, low, high);
 
-        quicksort(array, low, pi - 1, size);
-        quicksort(array, pi + 1, high, size);
-    }
+		quicksort(array, size, low, pi - 1);
+		quicksort(array, size, pi + 1, high);
+	}
 }
 
 /**
@@ -65,6 +64,7 @@ void quicksort(int *array, int low, int high, size_t size)
  */
 void quick_sort(int *array, size_t size)
 {
-    if (array && size > 1)
-        quicksort(array, 0, size - 1, size);
+	if (!array || !size)
+		return;
+	quicksort(array, size, 0, size - 1);
 }
