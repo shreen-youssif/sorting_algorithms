@@ -9,21 +9,21 @@
  */
 void merge_sort(int *arr, size_t size)
 {
-    int *temp_array;
-    size_t i;
+	int *temp_array;
+	size_t i;
 
-    if (arr == NULL || size < 2)
-        return;
+	if (arr == NULL || size < 2)
+		return;
 
-    temp_array = malloc(sizeof(int) * size);
-    if (!temp_array)
-        return;
+	temp_array = malloc(sizeof(int) * size);
+	if (!temp_array)
+		return;
 
-    for (i = 0; i < size; i++)
-        temp_array[i] = arr[i];
+	for (i = 0; i < size; i++)
+		temp_array[i] = arr[i];
 
-    recursive_merge(temp_array, 0, size, arr);
-    free(temp_array);
+	recursive_merge(temp_array, 0, size, arr);
+	free(temp_array);
 }
 
 /**
@@ -36,15 +36,15 @@ void merge_sort(int *arr, size_t size)
  */
 void recursive_merge(int *arr, size_t left, size_t right, int *result)
 {
-    size_t middle;
+	size_t middle;
 
-    middle = (left + right) / 2;
-    if (right - left < 2)
-        return;
+	middle = (left + right) / 2;
+	if (right - left < 2)
+		return;
 
-    recursive_merge(result, left, middle, arr);
-    recursive_merge(result, middle, right, arr);
-    merge_arrays(arr, left, right, result);
+	recursive_merge(result, left, middle, arr);
+	recursive_merge(result, middle, right, arr);
+	merge_arrays(arr, left, right, result);
 }
 
 /**
@@ -57,28 +57,28 @@ void recursive_merge(int *arr, size_t left, size_t right, int *result)
  */
 void merge_arrays(int *arr, size_t left, size_t right, int *result)
 {
-    size_t i = left, j, k, middle;
+	size_t i = left, j, k, middle;
 
-    j = middle = (left + right) / 2;
+	j = middle = (left + right) / 2;
 
-    printf("Merging...\n");
-    printf("[left]: ");
-    print_array(arr + left, middle - left);
-    printf("[right]: ");
-    print_array(arr + middle, right - middle);
+	printf("Merging...\n");
+	printf("[left]: ");
+	print_array(arr + left, middle - left);
+ 	printf("[right]: ");
+	print_array(arr + middle, right - middle);
 
-    for (k = left; k < right; k++)
-    {
-        if (i < middle && (j >= right || arr[i] <= arr[j]))
-        {
-            result[k] = arr[i++];
-        }
-        else
-        {
-            result[k] = arr[j++];
-        }
-    }
+	for (k = left; k < right; k++)
+	{
+		if (i < middle && (j >= right || arr[i] <= arr[j]))
+		{
+			result[k] = arr[i++];
+		}
+		else
+		{
+			result[k] = arr[j++];
+		}
+	}
 
-    printf("[Done]: ");
-    print_array(result + left, right - left);
+	printf("[Done]: ");
+	print_array(result + left, right - left);
 }
