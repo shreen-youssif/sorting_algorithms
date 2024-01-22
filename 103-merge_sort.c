@@ -64,7 +64,7 @@ void merge_arrays(int *arr, size_t left, size_t right, int *result)
 	printf("Merging...\n");
 	printf("[left]: ");
 	print_array(arr + left, middle - left);
- 	printf("[right]: ");
+	printf("[right]: ");
 	print_array(arr + middle, right - middle);
 
 	for (k = left; k < right; k++)
@@ -78,7 +78,6 @@ void merge_arrays(int *arr, size_t left, size_t right, int *result)
 			result[k] = arr[j++];
 		}
 	}
-
 	printf("[Done]: ");
 	print_array(result + left, right - left);
 }
