@@ -40,6 +40,7 @@ void cocktail_sort_list(listint_t **list);
 void swap_nodes(listint_t **list, listint_t *a, listint_t *b);
 /* counting sort */
 void counting_sort(int *array, size_t size);
+int find_max_value(int *arr, size_t size);
 /* merge sort */
 void merge_sort(int *arr, size_t size);
 void recursive_merge(int *arr, size_t left, size_t right, int *result);
