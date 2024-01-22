@@ -1,7 +1,10 @@
 #include "sort.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * counting_sort - Sorts an array of integers using Counting sort algorithm
+ * counting_sort - Sorts an array of integers in ascending order using the
+ *                 Counting sort algorithm
  *
  * @array: The array to be sorted
  * @size: Number of elements in @array
@@ -19,31 +22,33 @@ void counting_sort(int *array, size_t size)
             max = array[i];
     }
 
-    /* Create a counting array with size (max + 1) and initialize to 0 */
-    int *count = malloc((max + 1) * sizeof(int));
-    if (count == NULL)
+    /* Create and initialize the count array with zeros */
+    int *count_array = malloc(sizeof(int) * (max + 1));
+    if (count_array == NULL)
         return;
 
     for (int i = 0; i <= max; i++)
-        count[i] = 0;
+        count_array[i] = 0;
 
-    /* Count occurrences of each element in the input array */
+    /* Populate the count array with the occurrences of each element */
     for (size_t i = 0; i < size; i++)
-        count[array[i]]++;
+        count_array[array[i]]++;
 
-    /* Update the array with sorted values */
-    size_t j = 0;
-    for (int i = 0; i <= max; i++)
+    /* Print the count array */
+    print_array(count_array, max + 1);
+
+    /* Update the original array with sorted values using the count array */
+    size_t i = 0;
+    for (int j = 0; j <= max; j++)
     {
-        while (count[i] > 0)
+        while (count_array[j] > 0)
         {
-            array[j++] = i;
-            count[i]--;
+            array[i] = j;
+            count_array[j]--;
+            i++;
         }
     }
 
-    /* Print the counting array */
-    print_array(count, max + 1);
-
-    free(count);
+    /* Free dynamically allocated memory */
+    free(count_array);
 }
